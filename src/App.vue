@@ -10,9 +10,12 @@ import sheepStandImg from "./Sheep_stand.png";
 import sheepSleepImg from "./Sheep_sleep.png";
 
 const sheepSprite = ref(sheepSleepImg);
-const isRolling = ref(false);
 
 const toggleDirection = () => {
+    if (isJumping.value) {
+        return;
+    }
+    isJumping.value = true;
     isLeftPosition.value = !isLeftPosition.value;
     sheepSprite.value = sheepStandImg;
     jumps.value++;
@@ -38,7 +41,7 @@ const toggleDirection = () => {
             >
                 <img
                     @click="toggleDirection"
-                    class="w-48 h-48 cursor-pointer object-cover hover:scale-105 transition-transform duration-3000 ease-in-out"
+                    class="w-48 h-48 cursor-pointer object-cover transition-transform duration-3000 ease-in-out"
                     :class="[
                         isLeftPosition
                             ? 'rotate-[-55deg] scale-x-[-1]'
